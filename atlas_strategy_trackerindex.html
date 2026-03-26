@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Family Dentistry — Year 2 Strategy Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --brand-green: #13795F;
+    --brand-charcoal: #1A1A1A;
+    --brand-white: #FFFFFF;
+    --bg: #ffffff;
+    --bg-secondary: #f2f7f5;
+    --bg-tertiary: #e8f0ee;
+    --text: #1A1A1A;
+    --text-secondary: #4a5550;
+    --text-tertiary: #8a9990;
+    --border: rgba(19,121,95,0.15);
+    --border-strong: rgba(19,121,95,0.3);
+    --green: #13795F;
+    --green-bg: #e8f5f1;
+    --green-text: #0a4035;
+    --amber: #B06A00;
+    --amber-bg: #FFF3E0;
+    --amber-text: #7A4800;
+    --red: #C0392B;
+    --red-bg: #FDECEA;
+    --red-text: #7B241C;
+    --blue: #1a5f8a;
+    --blue-bg: #E3F2FD;
+    --blue-text: #0d3d5c;
+    --purple: #534AB7;
+    --purple-bg: #EEEDFE;
+    --purple-text: #3C3489;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --font-primary: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --font-body: 'Barlow', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1a18;
+      --bg-secondary: #162320;
+      --bg-tertiary: #1c2d29;
+      --text: #e8f5f1;
+      --text-secondary: #8ab8ae;
+      --text-tertiary: #4d7a70;
+      --border: rgba(19,121,95,0.2);
+      --border-strong: rgba(19,121,95,0.4);
+      --green: #1fa882;
+      --green-bg: #0a3028;
+      --green-text: #7dd4be;
+      --amber: #F0A500;
+      --amber-bg: #3d2800;
+      --amber-text: #ffd080;
+      --amber-text: #FAC775;
+      --red: #F09595;
+      --red-bg: #501313;
+      --red-text: #F7C1C1;
+      --blue: #85B7EB;
+      --blue-bg: #042C53;
+      --blue-text: #B5D4F4;
+      --purple: #AFA9EC;
+      --purple-bg: #26215C;
+      --purple-text: #CECBF6;
+    }
+  }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-tertiary);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  .header {
+    background: var(--brand-charcoal);
+    border-bottom: 3px solid var(--brand-green);
+    padding: 1.25rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .practice-name {
+    font-family: var(--font-primary);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brand-white);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .practice-sub {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    margin-top: 1px;
+    letter-spacing: 0.02em;
+  }
+  .header-goal {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--brand-green);
+    background: rgba(19,121,95,0.15);
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    border: 0.5px solid rgba(19,121,95,0.4);
+    letter-spacing: 0.03em;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 8px 16px;
+    border: 0.5px solid var(--border-strong);
+    border-radius: var(--radius);
+    font-size: 13px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .tab.active {
+    background: var(--brand-green);
+    color: var(--brand-white);
+    border-color: var(--brand-green);
+  }
+  .tab:hover:not(.active) {
+    background: var(--green-bg);
+    color: var(--brand-green);
+    border-color: var(--brand-green);
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+  .section-header {
+    font-family: var(--font-primary);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--brand-green);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--brand-green);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .metric {
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+  .metric-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .metric-value {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .metric-target {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-item:hover { background: var(--bg-secondary); margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; border-radius: var(--radius); }
+  .checklist-item input[type="checkbox"] {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--brand-green);
+  }
+  .checklist-label {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .checklist-label.done {
+    text-decoration: line-through;
+    color: var(--text-tertiary);
+    font-weight: 400;
+  }
+  .checklist-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  .badge-revenue { background: var(--green-bg); color: var(--brand-green); }
+  .badge-ops { background: var(--blue-bg); color: var(--blue-text); }
+  .badge-mktg { background: var(--amber-bg); color: var(--amber-text); }
+  .badge-team { background: var(--purple-bg); color: var(--purple-text); }
+  .progress-bar {
+    height: 5px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--brand-green);
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+    gap: 12px;
+  }
+  .phase-card {
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--brand-green);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    background: var(--bg);
+  }
+  .phase-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .phase-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .phase-target {
+    font-size: 13px;
+    color: var(--brand-green);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .phase-item {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 5px 0;
+    border-bottom: 0.5px solid var(--border);
+    line-height: 1.4;
+  }
+  .phase-item:last-child { border-bottom: none; }
+  .reset-btn {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    background: none;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+    cursor: pointer;
+    float: right;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover {
+    color: var(--brand-green);
+    border-color: var(--brand-green);
+  }
+  .metric-input {
+    width: 100%;
+    margin-top: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    outline: none;
+    font-family: inherit;
+  }
+  .metric-input::placeholder {
+    color: var(--text-tertiary);
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .status-text {
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+  }
+  .insight-box {
+    background: var(--green-bg);
+    border-left: 3px solid var(--brand-green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .insight-box strong { font-weight: 500; color: var(--brand-green); }
+  .benchmark-table {
+    width: 100%;
+    font-size: 13px;
+    border-collapse: collapse;
+  }
+  .benchmark-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 0 0 8px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .benchmark-table td {
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .benchmark-table tr:last-child td { border-bottom: none; }
+  .last-saved {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-align: right;
+    margin-top: 0.5rem;
+  }
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 600px) {
+    .container { padding: 1rem; }
+    .header { padding: 1rem; }
+    .phase-grid { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="data:image/png;base64,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" class="logo-mark" alt="Atlas Family Dentistry" style="height:40px; width:auto;">
+      <div>
+        <div class="practice-name">Atlas Family Dentistry</div>
+        <div class="practice-sub">Dr. Nassar Mohammad — Year 2 strategy tracker</div>
+      </div>
+    </div>
+    <div class="header-goal">Goal: $1M annual production by end of year 2</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('overview', this)">Strategy overview</button>
+    <button class="tab" onclick="showTab('daily', this)">Daily checklist</button>
+    <button class="tab" onclick="showTab('weekly', this)">Weekly checklist</button>
+    <button class="tab" onclick="showTab('monthly', this)">Monthly review</button>
+    <button class="tab" onclick="showTab('metrics', this)">Metrics tracker</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div id="overview" class="section active">
+    <p class="section-header">Year 2 business plan</p>
+    <p class="section-sub">Path from ~$65K average (March milestone: $78.7K) to $100K monthly — and toward $2M</p>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <div class="metric-label">Avg monthly production</div>
+        <div class="metric-value">~$65K</div>
+        <div class="metric-target">March milestone: $78.7K → Target: $100K</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Patients seen / month</div>
+        <div class="metric-value">158</div>
+        <div class="metric-target">March actual — includes new + returning</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Production per patient</div>
+        <div class="metric-value">$498</div>
+        <div class="metric-target">March actual (median: $250) → Target: $675+</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Google reviews</div>
+        <div class="metric-value">108 ★</div>
+        <div class="metric-target">5-star — strong asset</div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <strong>The core insight:</strong> Atlas does not have a traffic problem. At 158 patients seen in March across 75–90 new patients plus returning hygiene and treatment visits, volume is strong. The gap to $100K is a <strong>revenue-per-patient problem</strong>. March actual production per patient is $498, with a median of just $250 — meaning half of all patients are generating $250 or less, almost certainly hygiene-only visits. Raising average production per patient from $498 to $675 at the same patient volume closes the gap to $100K entirely. The fastest path is converting more hygiene visits into scheduled restorative treatment.
+    </div>
+
+    <div class="card">
+      <div class="card-title">March 2026 — actual patient production breakdown</div>
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Patients over $2,000</div>
+          <div class="metric-value">6</div>
+          <div class="metric-target">High-value restorative / complex tx</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Patients $1,000–$2,000</div>
+          <div class="metric-value">9</div>
+          <div class="metric-target">Crowns, multi-surface restorations</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Patients $500–$999</div>
+          <div class="metric-value">15</div>
+          <div class="metric-target">Single restorations, minor tx</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Patients $200 and under</div>
+          <div class="metric-value">59</div>
+          <div class="metric-target">Hygiene-only — the conversion opportunity</div>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-top:0.5rem;">59 patients came in for hygiene this month and left with nothing else scheduled. Even converting 20 of those into one restorative procedure at $300–400 adds $6,000–8,000 to the month. This is the single most actionable lever available right now. Collections note: a new billing team has been brought on to address the 71.6% collections rate — this is the right move and will significantly impact cash flow once stabilized.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">The three levers that move the number</div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">1. Treatment acceptance rate</div>
+          <div class="checklist-sub">If you're presenting $150K in treatment and accepting 55%, you're collecting $82K. Get to 65% and you're at $97K without changing anything else. This is the single fastest path to $100K.</div>
+        </div>
+      </div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">2. Hygiene reappointment and recare retention</div>
+          <div class="checklist-sub">With 75–90 new patients per month for nearly a year, you're building a significant active base. If those patients aren't returning, hygiene is leaking. Pre-schedule before checkout. Target 90%+ reappointment.</div>
+        </div>
+      </div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">3. Elective and high-value service mix</div>
+          <div class="checklist-sub">Clear aligners, implants, veneers, night guards, and whitening are cash-pay or low-insurance-dependency services. Even 5–8 elective cases per month meaningfully shifts the production number and the patient mix toward your 45–65 target demographic.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Quarterly roadmap to $100K</div>
+      <div class="phase-grid">
+        <div class="phase-card">
+          <div class="phase-num">Q1 — Months 1–3</div>
+          <div class="phase-title">Tighten the engine</div>
+          <div class="phase-target">Starting point: $498/patient, median $250</div>
+          <div class="phase-item">Pull treatment acceptance rate — know the number</div>
+          <div class="phase-item">Build pending treatment follow-up system</div>
+          <div class="phase-item">Hygiene reappointment protocol at 90%+</div>
+          <div class="phase-item">Standalone implant + aligner landing pages</div>
+          <div class="phase-item">First 5–10 referral relationships contacted</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">Q2 — Months 4–6</div>
+          <div class="phase-title">Build case value</div>
+          <div class="phase-target">Target avg: $92K</div>
+          <div class="phase-item">Team case presentation training</div>
+          <div class="phase-item">CareCredit / Sunbit financing options live</div>
+          <div class="phase-item">Night guard + aligner active promotion</div>
+          <div class="phase-item">Community presence (1 event or sponsorship)</div>
+          <div class="phase-item">Office brand touchpoints audit</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">Q3 — Months 7–9</div>
+          <div class="phase-title">Shift the mix</div>
+          <div class="phase-target">Target avg: $97K</div>
+          <div class="phase-item">Before/after content library built</div>
+          <div class="phase-item">Email campaign to existing patients re: cosmetic + restorative</div>
+          <div class="phase-item">Consultation event piloted</div>
+          <div class="phase-item">Insurance mix review — Medicaid toward 25%</div>
+          <div class="phase-item">Facebook ads test for 45–65 demographic</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">Q4 — Months 10–12</div>
+          <div class="phase-title">Sustain $100K+</div>
+          <div class="phase-target">Target avg: $100K+</div>
+          <div class="phase-item">Double down on referral channels working</div>
+          <div class="phase-item">Evaluate second hygienist need</div>
+          <div class="phase-item">In-house membership plan launched</div>
+          <div class="phase-item">Assess implant ad readiness (reviews, landing page, team)</div>
+          <div class="phase-item">Year 2 close: plan for $2M path</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Attracting the 45–65 high-income patient</div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">Own implants and clear aligners explicitly</div>
+          <div class="checklist-sub">Dr. Mohammad's certifications must be front and center — dedicated landing pages, Google Business Profile, and in all marketing materials. This demographic searches before they call.</div>
+        </div>
+      </div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">Build professional referral relationships</div>
+          <div class="checklist-sub">Periodontists, oral surgeons, primary care physicians, and ENTs in the area. Personal outreach — a brief intro and coffee — not flyers. One strong referral relationship can be worth more than months of ad spend.</div>
+        </div>
+      </div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">Be a face in the New Albany community</div>
+          <div class="checklist-sub">New Albany Country Club adjacent events, charity golf tournaments, civic organizations, high school booster clubs. Dr. Mohammad being a known face in the right rooms accelerates word-of-mouth with the exact demographic you're targeting.</div>
+        </div>
+      </div>
+      <div class="checklist-item" style="cursor:default;">
+        <div>
+          <div class="checklist-label">Let the brand do the work</div>
+          <div class="checklist-sub">Family-owned, not corporate. A second-generation American with an OSU magna cum laude degree and deep community roots. That story is a competitive advantage over DSOs. It needs to live on the website, in social content, and in every new patient interaction.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY -->
+  <div id="daily" class="section">
+    <p class="section-header">Daily CEO checklist</p>
+    <p class="section-sub">Dr. Mohammad — 10 minutes every morning before patients begin. Resets each session.</p>
+    <button class="reset-btn" onclick="resetList('daily-checks')">Reset all</button>
+
+    <div class="card">
+      <div class="card-title">Morning huddle prep — 5 min</div>
+      <div id="daily-checks">
+        <div class="checklist-item" onclick="toggleCheck(this, 'd1')">
+          <input type="checkbox" id="d1">
+          <div>
+            <div class="checklist-label">Review today's schedule for production target</div>
+            <div class="checklist-sub">Is today on track to hit the daily production goal? Identify any gaps or underbooked slots before the day starts.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'd2')">
+          <input type="checkbox" id="d2">
+          <div>
+            <div class="checklist-label">Flag patients with open treatment plans on today's schedule</div>
+            <div class="checklist-sub">Who has unscheduled or pending treatment? Know before they sit in the chair so you can have the conversation naturally, not reactively.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'd3')">
+          <input type="checkbox" id="d3">
+          <div>
+            <div class="checklist-label">Review any new patient consultations scheduled today</div>
+            <div class="checklist-sub">Know their intake info. Be ready to present comprehensive treatment — not just respond to their chief complaint. Every new patient is a long-term relationship, not a single visit.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'd4')">
+          <input type="checkbox" id="d4">
+          <div>
+            <div class="checklist-label">Confirm no cancellations went unfilled</div>
+            <div class="checklist-sub">Every empty slot is revenue that cannot be recovered. Front desk should have a same-day fill protocol — confirm it ran overnight.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Patient experience — ongoing through the day</div>
+      <div class="checklist-item" onclick="toggleCheck(this, 'd5')">
+        <input type="checkbox" id="d5">
+        <div>
+          <div class="checklist-label">Greet at least one patient by name in the waiting area</div>
+          <div class="checklist-sub">Small gesture. Outsized impact on loyalty and referrals. The older, higher-income patient you want to attract notices this most.</div>
+        </div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this, 'd6')">
+        <input type="checkbox" id="d6">
+        <div>
+          <div class="checklist-label">Ask one satisfied patient for a Google review today</div>
+          <div class="checklist-sub">In-person ask plus same-day text link is the highest-conversion approach. Keep it personal — not scripted. At 108 reviews, the goal is steady weekly adds, not a one-time push.</div>
+        </div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this, 'd7')">
+        <input type="checkbox" id="d7">
+        <div>
+          <div class="checklist-label">Confirm every patient left with a next appointment</div>
+          <div class="checklist-sub">Pre-schedule before checkout. The hygiene reappointment target is 90%+. One patient leaving without a scheduled return is one patient at risk of becoming inactive.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">End of day — 3 min</div>
+      <div class="checklist-item" onclick="toggleCheck(this, 'd8')">
+        <input type="checkbox" id="d8">
+        <div>
+          <div class="checklist-label">Check actual vs. scheduled production for the day</div>
+          <div class="checklist-sub">Know the number. Daily patterns reveal scheduling gaps and case acceptance problems before they compound into a bad month.</div>
+        </div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this, 'd9')">
+        <input type="checkbox" id="d9">
+        <div>
+          <div class="checklist-label">Note any patient feedback — positive or negative</div>
+          <div class="checklist-sub">Surface to the team the next morning. Positive feedback should be celebrated. Negative patterns need to be caught within days, not months.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY -->
+  <div id="weekly" class="section">
+    <p class="section-header">Weekly CEO checklist</p>
+    <p class="section-sub">Hannah + Dr. Mohammad — 30 min every Monday or Friday. Resets each session.</p>
+    <button class="reset-btn" onclick="resetList('weekly-checks')">Reset all</button>
+
+    <div id="weekly-checks">
+      <div class="card">
+        <div class="card-title"><span class="badge badge-revenue">Revenue</span> Production review</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w1')">
+          <input type="checkbox" id="w1">
+          <div>
+            <div class="checklist-label">Review week's production vs. monthly target pace</div>
+            <div class="checklist-sub">Running total toward $100K monthly goal. Are you on pace, behind, or ahead? Adjust the following week's schedule if behind.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w2')">
+          <input type="checkbox" id="w2">
+          <div>
+            <div class="checklist-label">Pull and review the pending treatment report</div>
+            <div class="checklist-sub">Who has unscheduled treatment from the past 30 days? Assign follow-up calls. This report is where your hidden revenue lives.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w3')">
+          <input type="checkbox" id="w3">
+          <div>
+            <div class="checklist-label">Review collections vs. production this week</div>
+            <div class="checklist-sub">Collections should track at 98%+ of production. A gap here indicates billing or insurance processing issues that compound fast if ignored.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="badge badge-ops">Operations</span> Schedule health</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w4')">
+          <input type="checkbox" id="w4">
+          <div>
+            <div class="checklist-label">Check next 2 weeks' schedule fill rate</div>
+            <div class="checklist-sub">Target 85–90% capacity. Persistent gaps are a scheduling strategy problem — not a sign you need more new patients.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w5')">
+          <input type="checkbox" id="w5">
+          <div>
+            <div class="checklist-label">Review last week's cancellations and no-shows</div>
+            <div class="checklist-sub">Track the rate week over week. Over 10% consistently is a red flag requiring a confirmation process overhaul and potentially a deposit policy.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w6')">
+          <input type="checkbox" id="w6">
+          <div>
+            <div class="checklist-label">Confirm hygiene reappointment rate for the week</div>
+            <div class="checklist-sub">Every patient leaving without a scheduled hygiene return is a leak. At 75–90 new patients per month, even a 15% leak compounds significantly over 12 months.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="badge badge-mktg">Marketing</span> Online presence and growth</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w7')">
+          <input type="checkbox" id="w7">
+          <div>
+            <div class="checklist-label">Check for new Google reviews and respond to each</div>
+            <div class="checklist-sub">Respond to every review — 5-star and otherwise. Response time and quality matter for search ranking and for the patients reading your responses before they book.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w8')">
+          <input type="checkbox" id="w8">
+          <div>
+            <div class="checklist-label">Confirm social posts went live this week</div>
+            <div class="checklist-sub">Minimum 2 posts per week. Is the content authentic to Atlas's voice, or does it feel like a template? Dr. Mohammad appearing on camera — even briefly — outperforms any graphic.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w9')">
+          <input type="checkbox" id="w9">
+          <div>
+            <div class="checklist-label">Any referral relationship follow-up needed this week?</div>
+            <div class="checklist-sub">Track outreach to specialists, physicians, and community partners. Professional relationships go cold without consistent, genuine contact — not just a flyer drop.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w10')">
+          <input type="checkbox" id="w10">
+          <div>
+            <div class="checklist-label">Check marketing vendor deliverables for the week</div>
+            <div class="checklist-sub">What was produced? What did it cost in time or money? Require data on new patient inquiries from digital channels — not just activity reports.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="badge badge-team">Team</span> Culture and performance</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w11')">
+          <input type="checkbox" id="w11">
+          <div>
+            <div class="checklist-label">Give one specific piece of positive feedback to a team member</div>
+            <div class="checklist-sub">Name the behavior, not just the outcome. "The way you explained that treatment plan to the patient in room 2 was exactly right" lands differently than "good job." Team retention is a revenue strategy.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'w12')">
+          <input type="checkbox" id="w12">
+          <div>
+            <div class="checklist-label">Address any patient experience issues from the week</div>
+            <div class="checklist-sub">Resolve quickly. Close the loop with the patient if needed. A complaint handled well often produces a loyal patient. Ignored, it becomes a negative review.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTHLY -->
+  <div id="monthly" class="section">
+    <p class="section-header">Monthly CEO review</p>
+    <p class="section-sub">Hannah + Dr. Mohammad — 60 min at month end, before the next month begins. Resets each session.</p>
+    <button class="reset-btn" onclick="resetList('monthly-checks')">Reset all</button>
+
+    <div id="monthly-checks">
+      <div class="card">
+        <div class="card-title"><span class="badge badge-revenue">Revenue</span> Financial performance</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm1')">
+          <input type="checkbox" id="m1">
+          <div>
+            <div class="checklist-label">Total production vs. monthly target</div>
+            <div class="checklist-sub">Where did you land? What drove the result — more patients, higher case value, or both? Understanding the why matters more than the number alone.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm2')">
+          <input type="checkbox" id="m2">
+          <div>
+            <div class="checklist-label">Production per patient visit</div>
+            <div class="checklist-sub">Target: $675+. March actual: $498 (median $250). If median stays below $300 by Q2, treatment planning and case presentation need direct intervention — training, scripting, or both. The goal is converting hygiene-only visits into scheduled restorative treatment.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm3')">
+          <input type="checkbox" id="m3">
+          <div>
+            <div class="checklist-label">Production breakdown: hygiene / restorative / elective</div>
+            <div class="checklist-sub">Elective services — aligners, whitening, cosmetic, night guards — should grow as a percentage each quarter. If it's flat, the patient mix isn't shifting toward your target demographic.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm4')">
+          <input type="checkbox" id="m4">
+          <div>
+            <div class="checklist-label">Insurance mix: what percentage is Medicaid this month?</div>
+            <div class="checklist-sub">Target: 25% or below. Track the trend. The mix shifts by growing other categories faster — not by dropping Medicaid patients. Is the trend moving in the right direction?</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm5')">
+          <input type="checkbox" id="m5">
+          <div>
+            <div class="checklist-label">Collections rate this month</div>
+            <div class="checklist-sub">Target: 98%+ of production. If collections are running below 95% consistently, audit the billing process. This is a silent drain that compounds over 12 months.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="badge badge-ops">Operations</span> Practice health</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm6')">
+          <input type="checkbox" id="m6">
+          <div>
+            <div class="checklist-label">New patient count and referral sources</div>
+            <div class="checklist-sub">75–90 is the current benchmark. Where are they coming from? Track by source: Google, referral, insurance directory, social, word of mouth. Double down on what's working.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm7')">
+          <input type="checkbox" id="m7">
+          <div>
+            <div class="checklist-label">Treatment acceptance rate this month</div>
+            <div class="checklist-sub">Target: 65%+. If below 55%, significant revenue is being presented and declined. This requires a case presentation conversation with the clinical team — not a marketing fix.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm8')">
+          <input type="checkbox" id="m8">
+          <div>
+            <div class="checklist-label">Hygiene reappointment rate</div>
+            <div class="checklist-sub">Target: 90%+. This is your retention rate in disguise. A growing practice with a poor reappointment rate is filling a leaky bucket.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm9')">
+          <input type="checkbox" id="m9">
+          <div>
+            <div class="checklist-label">Cancellation and no-show rate</div>
+            <div class="checklist-sub">Keep under 10%. If trending up, review the confirmation process. Chronic offenders may need a deposit policy — which is reasonable and defensible at a premium practice.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm10')">
+          <input type="checkbox" id="m10">
+          <div>
+            <div class="checklist-label">Schedule utilization rate</div>
+            <div class="checklist-sub">Target: 85–90% of available chair time filled. If consistently below 75%, the problem is scheduling strategy — not patient volume. If above 90%, evaluate whether a second hygienist is needed.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="badge badge-mktg">Marketing</span> Growth levers</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm11')">
+          <input type="checkbox" id="m11">
+          <div>
+            <div class="checklist-label">Google review count and rating</div>
+            <div class="checklist-sub">Currently 108 five-star reviews — a genuine asset. Track monthly adds. The goal is consistent weekly growth. Rating should never dip below 4.8. Respond to every review.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm12')">
+          <input type="checkbox" id="m12">
+          <div>
+            <div class="checklist-label">Marketing vendor accountability review</div>
+            <div class="checklist-sub">What did you spend? What did it return in new patient inquiries and booked appointments? Require specific data — not just activity reports. If they can't tell you cost per acquisition, that's the answer.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm13')">
+          <input type="checkbox" id="m13">
+          <div>
+            <div class="checklist-label">Social media: follower growth and engagement rate</div>
+            <div class="checklist-sub">Engagement rate matters more than follower count. Track which content types perform best. Is Dr. Mohammad showing up authentically? Social serves as validation, not primary lead generation.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm14')">
+          <input type="checkbox" id="m14">
+          <div>
+            <div class="checklist-label">Referral source tracking: who sent patients this month?</div>
+            <div class="checklist-sub">Thank referral sources — personally. A handwritten note or a lunch goes a long way. Double down on productive relationships. Let cold ones warm back up with a genuine touchpoint.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="badge badge-team">Team</span> People and culture</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm15')">
+          <input type="checkbox" id="m15">
+          <div>
+            <div class="checklist-label">Team pulse check: any retention risks?</div>
+            <div class="checklist-sub">Losing a hygienist or front desk lead mid-growth is a significant setback — both in production and patient experience. Stay ahead of it. Ask. Listen. Act before someone gives notice.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm16')">
+          <input type="checkbox" id="m16">
+          <div>
+            <div class="checklist-label">Training or development need identified?</div>
+            <div class="checklist-sub">Case presentation, patient communication, billing accuracy, aligner consultations. Invest in the team before problems surface as production gaps.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm17')">
+          <input type="checkbox" id="m17">
+          <div>
+            <div class="checklist-label">Share monthly production results with the full team</div>
+            <div class="checklist-sub">Teams that know the numbers perform better. Celebrate the wins specifically. Frame gaps as shared challenges with a shared solution. The team's engagement is a revenue strategy.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Strategic decision: the one move for next month</div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm18')">
+          <input type="checkbox" id="m18">
+          <div>
+            <div class="checklist-label">Identify the single highest-leverage action for the coming month</div>
+            <div class="checklist-sub">Not a list of ten things. One thing. What will move the production number or the patient mix most? Be specific about what success looks like in 30 days.</div>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this, 'm19')">
+          <input type="checkbox" id="m19">
+          <div>
+            <div class="checklist-label">Assign clear ownership and a deadline to that action</div>
+            <div class="checklist-sub">If a priority has no named owner and no date, it will not happen. Decide here. Write it down. Check it at the next monthly review.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div id="metrics" class="section">
+    <p class="section-header">Metrics dashboard</p>
+    <p class="section-sub">Data pulls live from the Atlas Google Sheet. Update the Sheet monthly and this dashboard refreshes automatically.</p>
+
+    <div class="card" id="sheet-status-card">
+      <div class="card-title">Data source</div>
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+        <div style="font-size:13px; color:var(--text-secondary);">
+          Connected to Atlas Family Dentistry metrics Sheet.
+          <a href="https://docs.google.com/spreadsheets/d/1xlOI3kCYQSoIkPKLLXnZGqgQNmryYLuP_N2P8xelR9g/edit" target="_blank"
+             style="color:var(--brand-green); text-decoration:none; margin-left:6px;">Open Sheet ↗</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span id="sync-status" style="font-size:12px; color:var(--text-tertiary);">Loading...</span>
+          <button onclick="loadSheetData()" style="padding:6px 14px; background:var(--brand-green); color:white; border:none; border-radius:var(--radius); font-family:inherit; font-size:12px; cursor:pointer;">Refresh</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="no-data-msg" style="display:none;">
+      <div class="insight-box" style="margin-top:1rem;">
+        <strong>No data found yet.</strong> Make sure your Google Sheet has the correct column headers in row 1 and at least one month of data entered. 
+        <a href="https://docs.google.com/spreadsheets/d/1xlOI3kCYQSoIkPKLLXnZGqgQNmryYLuP_N2P8xelR9g/edit" target="_blank" style="color:var(--brand-green);">Open the Sheet ↗</a>
+      </div>
+    </div>
+
+    <div id="dashboard-content" style="display:none;">
+
+      <!-- LATEST MONTH SUMMARY -->
+      <div class="card">
+        <div class="card-title">Most recent month — <span id="current-month-label"></span></div>
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="metric-label">Production</div>
+            <div class="metric-value" id="d-production">—</div>
+            <div class="progress-bar"><div class="progress-fill" id="prod-bar" style="width:0%"></div></div>
+            <div class="progress-label" id="prod-label">of $100K target</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Collections</div>
+            <div class="metric-value" id="d-collections">—</div>
+            <div class="metric-target" id="d-collections-rate"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Patients seen</div>
+            <div class="metric-value" id="d-patients">—</div>
+            <div class="metric-target">March 2026 baseline: 158</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Production per patient</div>
+            <div class="metric-value" id="d-ppp">—</div>
+            <div class="metric-target" id="d-ppp-status"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Treatment acceptance</div>
+            <div class="metric-value" id="d-acceptance">—</div>
+            <div class="metric-target" id="d-acceptance-status"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Hygiene reappt rate</div>
+            <div class="metric-value" id="d-reappoint">—</div>
+            <div class="metric-target" id="d-reappoint-status"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Collections rate</div>
+            <div class="metric-value" id="d-col-pct">—</div>
+            <div class="metric-target" id="d-col-status"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Google reviews</div>
+            <div class="metric-value" id="d-reviews">—</div>
+            <div class="metric-target" id="d-reviews-delta"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PATIENT MIX -->
+      <div class="card" id="mix-card" style="display:none;">
+        <div class="card-title">Patient mix — <span id="mix-month-label"></span></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start;">
+          <div>
+            <div class="metric-grid" style="grid-template-columns:1fr 1fr 1fr;">
+              <div class="metric" style="border-left:3px solid var(--brand-charcoal);">
+                <div class="metric-label">Medicaid</div>
+                <div class="metric-value" id="mix-medicaid-n">—</div>
+                <div class="metric-target" id="mix-medicaid-pct"></div>
+              </div>
+              <div class="metric" style="border-left:3px solid var(--brand-green);">
+                <div class="metric-label">PPO</div>
+                <div class="metric-value" id="mix-ppo-n">—</div>
+                <div class="metric-target" id="mix-ppo-pct"></div>
+              </div>
+              <div class="metric" style="border-left:3px solid #8ab8ae;">
+                <div class="metric-label">Cash / member</div>
+                <div class="metric-value" id="mix-cash-n">—</div>
+                <div class="metric-target" id="mix-cash-pct"></div>
+              </div>
+            </div>
+            <div style="font-size:12px; color:var(--text-tertiary); margin-top:8px;">Medicaid target: 25% or below</div>
+          </div>
+          <div style="position:relative; height:160px;">
+            <canvas id="mix-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- TREND CHARTS -->
+      <div class="card">
+        <div class="card-title">Production vs. collections trend</div>
+        <div style="position:relative; width:100%; height:240px;">
+          <canvas id="prod-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Patients seen and production per patient trend</div>
+        <div style="position:relative; width:100%; height:220px;">
+          <canvas id="pt-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- HISTORY TABLE -->
+      <div class="card">
+        <div class="card-title">Monthly history</div>
+        <div style="overflow-x:auto;">
+          <table class="benchmark-table" id="history-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Production</th>
+                <th>Collections</th>
+                <th>Col %</th>
+                <th>Patients</th>
+                <th>$/patient</th>
+                <th>Medicaid %</th>
+                <th>Tx accept %</th>
+                <th>Hygiene reappt %</th>
+                <th>Reviews</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- NOTES -->
+      <div class="card" id="notes-card" style="display:none;">
+        <div class="card-title">Notes — <span id="notes-month-label"></span></div>
+        <div id="notes-content" style="font-size:14px; color:var(--text-secondary); line-height:1.7; white-space:pre-wrap;"></div>
+      </div>
+
+    </div>
+
+    <!-- BENCHMARKS -->
+    <div class="card" style="margin-top:1rem;">
+      <div class="card-title">Benchmark reference</div>
+      <table class="benchmark-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th style="color:var(--red);">Needs attention</th>
+            <th style="color:var(--amber);">Getting there</th>
+            <th style="color:var(--green);">On target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Production / patient</td><td style="color:var(--red);">Below $450</td><td style="color:var(--amber);">$450–$674</td><td style="color:var(--green);">$675+</td></tr>
+          <tr><td>Collections rate</td><td style="color:var(--red);">Below 95%</td><td style="color:var(--amber);">95–97%</td><td style="color:var(--green);">98%+</td></tr>
+          <tr><td>Treatment acceptance</td><td style="color:var(--red);">Below 55%</td><td style="color:var(--amber);">55–64%</td><td style="color:var(--green);">65%+</td></tr>
+          <tr><td>Hygiene reappointment</td><td style="color:var(--red);">Below 80%</td><td style="color:var(--amber);">80–89%</td><td style="color:var(--green);">90%+</td></tr>
+          <tr><td>Medicaid patient mix</td><td style="color:var(--red);">Over 40%</td><td style="color:var(--amber);">26–40%</td><td style="color:var(--green);">25% or below</td></tr>
+          <tr><td>Monthly production</td><td style="color:var(--red);">Below $70K</td><td style="color:var(--amber);">$70K–$99K</td><td style="color:var(--green);">$100K+</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const SHEET_ID =  + SHEET_ID + ;
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Sheet1`;
+
+let chartProd = null, chartPt = null, chartMix = null;
+
+function showTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleCheck(item, id) {
+  const cb = item.querySelector('input[type="checkbox"]');
+  const label = item.querySelector('.checklist-label');
+  cb.checked = !cb.checked;
+  label.classList.toggle('done', cb.checked);
+}
+
+function resetList(id) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  container.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
+  container.querySelectorAll('.checklist-label').forEach(l => l.classList.remove('done'));
+}
+
+function fmt$(n) { return (n !== null && !isNaN(n)) ? '$' + Math.round(n).toLocaleString() : '—'; }
+function fmtPct(n) { return (n !== null && !isNaN(n)) ? Math.round(n) + '%' : '—'; }
+
+function statusColor(val, warn, target, inverted) {
+  if (val === null || isNaN(val)) return 'var(--text-tertiary)';
+  if (!inverted) {
+    if (val >= target) return 'var(--green)';
+    if (val >= warn) return 'var(--amber)';
+    return 'var(--red)';
+  } else {
+    if (val <= target) return 'var(--green)';
+    if (val <= warn) return 'var(--amber)';
+    return 'var(--red)';
+  }
+}
+
+function statusText(val, warn, target, inverted) {
+  if (val === null || isNaN(val)) return '';
+  if (!inverted) {
+    if (val >= target) return 'On target';
+    if (val >= warn) return 'Getting there';
+    return 'Needs attention';
+  } else {
+    if (val <= target) return 'On target';
+    if (val <= warn) return 'Getting there';
+    return 'Needs attention';
+  }
+}
+
+function parseNum(v) {
+  if (v === null || v === undefined || v === '') return null;
+  const n = parseFloat(String(v).replace(/[$,%]/g, ''));
+  return isNaN(n) ? null : n;
+}
+
+async function loadSheetData() {
+  const statusEl = document.getElementById('sync-status');
+  statusEl.textContent = 'Loading...';
+  statusEl.style.color = 'var(--text-tertiary)';
+
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+    const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
+    const table = json.table;
+
+    if (!table || !table.rows || table.rows.length === 0) {
+      document.getElementById('no-data-msg').style.display = 'block';
+      document.getElementById('dashboard-content').style.display = 'none';
+      statusEl.textContent = 'No data found in Sheet';
+      statusEl.style.color = 'var(--red)';
+      return;
+    }
+
+    // Parse headers from row 0
+    const headers = table.cols.map(c => (c.label || '').trim().toLowerCase());
+    const col = (name) => headers.findIndex(h => h.includes(name));
+
+    const iMonth = col('month');
+    const iProd = col('production');
+    const iCol = col('collection');
+    const iPts = col('patient');
+    const iMed = col('medicaid');
+    const iPPO = col('ppo');
+    const iCash = col('cash');
+    const iAcc = col('acceptance');
+    const iReappt = col('reappoint');
+    const iReviews = col('review');
+    const iNotes = col('note');
+
+    const rows = table.rows.map(r => {
+      const c = r.c || [];
+      const get = (i) => (i >= 0 && c[i] && c[i].v !== null) ? c[i].v : null;
+      return {
+        month: get(iMonth),
+        prod: parseNum(get(iProd)),
+        col: parseNum(get(iCol)),
+        pts: parseNum(get(iPts)),
+        med: parseNum(get(iMed)),
+        ppo: parseNum(get(iPPO)),
+        cash: parseNum(get(iCash)),
+        acc: parseNum(get(iAcc)),
+        reappt: parseNum(get(iReappt)),
+        reviews: parseNum(get(iReviews)),
+        notes: get(iNotes)
+      };
+    }).filter(r => r.month);
+
+    if (rows.length === 0) {
+      document.getElementById('no-data-msg').style.display = 'block';
+      document.getElementById('dashboard-content').style.display = 'none';
+      statusEl.textContent = 'No valid rows found';
+      statusEl.style.color = 'var(--amber)';
+      return;
+    }
+
+    document.getElementById('no-data-msg').style.display = 'none';
+    document.getElementById('dashboard-content').style.display = 'block';
+    statusEl.textContent = 'Last synced ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+    statusEl.style.color = 'var(--green)';
+
+    renderDashboard(rows);
+
+  } catch(e) {
+    console.error(e);
+    document.getElementById('sync-status').textContent = 'Could not load Sheet — check sharing settings';
+    document.getElementById('sync-status').style.color = 'var(--red)';
+  }
+}
+
+function renderDashboard(rows) {
+  const latest = rows[rows.length - 1];
+  const ppp = (latest.prod && latest.pts) ? latest.prod / latest.pts : null;
+  const colPct = (latest.prod && latest.col) ? (latest.col / latest.prod) * 100 : null;
+
+  document.getElementById('current-month-label').textContent = latest.month;
+  document.getElementById('mix-month-label').textContent = latest.month;
+
+  document.getElementById('d-production').textContent = fmt$(latest.prod);
+  document.getElementById('d-collections').textContent = fmt$(latest.col);
+  document.getElementById('d-patients').textContent = latest.pts !== null ? Math.round(latest.pts) : '—';
+  document.getElementById('d-ppp').textContent = fmt$(ppp);
+  document.getElementById('d-acceptance').textContent = fmtPct(latest.acc);
+  document.getElementById('d-reappoint').textContent = fmtPct(latest.reappt);
+  document.getElementById('d-reviews').textContent = latest.reviews !== null ? Math.round(latest.reviews) : '—';
+  document.getElementById('d-col-pct').textContent = fmtPct(colPct);
+  document.getElementById('d-collections-rate').textContent = colPct !== null ? Math.round(colPct) + '% collection rate' : '';
+
+  if (latest.prod) {
+    const pct = Math.min(Math.round((latest.prod / 100000) * 100), 100);
+    document.getElementById('prod-bar').style.width = pct + '%';
+    document.getElementById('prod-label').textContent = Math.round(latest.prod / 1000) + 'K of $100K target (' + pct + '%)';
+  }
+
+  const setPPP = (id, val, w, t, inv) => {
+    const el = document.getElementById(id);
+    el.style.color = statusColor(val, w, t, inv);
+    el.textContent = statusText(val, w, t, inv);
+  };
+  setPPP('d-ppp-status', ppp, 450, 675, false);
+  setPPP('d-acceptance-status', latest.acc, 55, 65, false);
+  setPPP('d-reappoint-status', latest.reappt, 80, 90, false);
+  setPPP('d-col-status', colPct, 95, 98, false);
+
+  const revDelta = latest.reviews !== null ? latest.reviews - 108 : null;
+  document.getElementById('d-reviews-delta').textContent = revDelta !== null
+    ? (revDelta >= 0 ? '+' + revDelta + ' since Mar 2026 baseline' : revDelta + ' from baseline')
+    : '';
+
+  // Patient mix
+  const mixTotal = (latest.med || 0) + (latest.ppo || 0) + (latest.cash || 0);
+  if (mixTotal > 0) {
+    document.getElementById('mix-card').style.display = 'block';
+    const medPct = Math.round((latest.med || 0) / mixTotal * 100);
+    const ppoPct = Math.round((latest.ppo || 0) / mixTotal * 100);
+    const cashPct = Math.round((latest.cash || 0) / mixTotal * 100);
+    document.getElementById('mix-medicaid-n').textContent = latest.med !== null ? Math.round(latest.med) : '—';
+    document.getElementById('mix-ppo-n').textContent = latest.ppo !== null ? Math.round(latest.ppo) : '—';
+    document.getElementById('mix-cash-n').textContent = latest.cash !== null ? Math.round(latest.cash) : '—';
+    const medPctEl = document.getElementById('mix-medicaid-pct');
+    medPctEl.textContent = medPct + '% of mix';
+    medPctEl.style.color = statusColor(medPct, 40, 25, true);
+    document.getElementById('mix-ppo-pct').textContent = ppoPct + '% of mix';
+    document.getElementById('mix-cash-pct').textContent = cashPct + '% of mix';
+
+    if (chartMix) chartMix.destroy();
+    chartMix = new Chart(document.getElementById('mix-chart').getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Medicaid', 'PPO', 'Cash / member'],
+        datasets: [{ data: [latest.med||0, latest.ppo||0, latest.cash||0], backgroundColor: ['#1A1A1A','#13795F','#8ab8ae'], borderWidth: 0 }]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ font:{size:11}, padding:8, boxWidth:10 } } } }
+    });
+  } else {
+    document.getElementById('mix-card').style.display = 'none';
+  }
+
+  // Notes
+  if (latest.notes) {
+    document.getElementById('notes-card').style.display = 'block';
+    document.getElementById('notes-month-label').textContent = latest.month;
+    document.getElementById('notes-content').textContent = latest.notes;
+  } else {
+    document.getElementById('notes-card').style.display = 'none';
+  }
+
+  // Trend charts
+  const labels = rows.map(r => r.month);
+  const prodData = rows.map(r => r.prod);
+  const colData = rows.map(r => r.col);
+  const ptsData = rows.map(r => r.pts);
+  const pppData = rows.map(r => (r.prod && r.pts) ? Math.round(r.prod / r.pts) : null);
+
+  if (chartProd) chartProd.destroy();
+  chartProd = new Chart(document.getElementById('prod-chart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Production', data: prodData, backgroundColor: '#1A1A1A', borderRadius: 3 },
+        { label: 'Collections', data: colData, backgroundColor: '#13795F', borderRadius: 3 },
+        { label: '$100K target', data: rows.map(() => 100000), type: 'line', borderColor: '#C0392B', borderDash: [4,4], borderWidth: 1.5, pointRadius: 0, fill: false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: true, labels: { font:{size:11}, boxWidth:10, padding:12 } } },
+      scales: {
+        y: { ticks: { callback: v => '$' + Math.round(v/1000) + 'K', font:{size:11} }, grid: { color:'rgba(0,0,0,0.06)' } },
+        x: { ticks: { font:{size:11} }, grid: { display:false } }
+      }
+    }
+  });
+
+  if (chartPt) chartPt.destroy();
+  chartPt = new Chart(document.getElementById('pt-chart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Patients seen', data: ptsData, borderColor: '#1A1A1A', backgroundColor: 'rgba(26,26,26,0.06)', fill:true, tension:0.3, pointRadius:4, yAxisID:'y' },
+        { label: '$/patient', data: pppData, borderColor: '#13795F', backgroundColor:'transparent', tension:0.3, pointRadius:4, yAxisID:'y2', borderDash:[3,3] }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display:true, labels:{ font:{size:11}, boxWidth:10, padding:12 } } },
+      scales: {
+        y: { ticks:{ font:{size:11} }, grid:{ color:'rgba(0,0,0,0.06)' }, title:{ display:true, text:'Patients', font:{size:10} } },
+        y2: { position:'right', ticks:{ callback: v => '$'+v, font:{size:11} }, grid:{ display:false }, title:{ display:true, text:'$/patient', font:{size:10} } },
+        x: { ticks:{ font:{size:11} }, grid:{ display:false } }
+      }
+    }
+  });
+
+  // History table
+  const tbody = document.getElementById('history-body');
+  tbody.innerHTML = '';
+  rows.slice().reverse().forEach(r => {
+    const pp = (r.prod && r.pts) ? Math.round(r.prod / r.pts) : null;
+    const cp = (r.prod && r.col) ? Math.round(r.col / r.prod * 100) : null;
+    const mixT = (r.med||0) + (r.ppo||0) + (r.cash||0);
+    const medPct = mixT > 0 ? Math.round((r.med||0)/mixT*100) : null;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight:500;">${r.month}</td>
+      <td>${fmt$(r.prod)}</td>
+      <td>${fmt$(r.col)}</td>
+      <td style="color:${statusColor(cp,95,98,false)}">${fmtPct(cp)}</td>
+      <td>${r.pts !== null ? Math.round(r.pts) : '—'}</td>
+      <td style="color:${statusColor(pp,450,675,false)}">${fmt$(pp)}</td>
+      <td style="color:${statusColor(medPct,40,25,true)}">${fmtPct(medPct)}</td>
+      <td style="color:${statusColor(r.acc,55,65,false)}">${fmtPct(r.acc)}</td>
+      <td style="color:${statusColor(r.reappt,80,90,false)}">${fmtPct(r.reappt)}</td>
+      <td>${r.reviews !== null ? Math.round(r.reviews) : '—'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadSheetData();
+});
+</script>
+</body>
+</html>
